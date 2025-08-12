@@ -8,7 +8,8 @@
       "@libs/*": ["./libs/*"],
       "@components/*": ["./components/*"],
       "@routes/*": ["./routes/*"],
-      "@screens/*": ["./screens/*"]
+      "@screens/*": ["./screens/*"],
+      "@api/*": ["./api/*"]
     }
   }
 }
