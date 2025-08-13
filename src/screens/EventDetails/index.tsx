@@ -42,7 +42,7 @@ const EventDetails = () => {
         ))}
       </ScrollView>
       <View style={styles.infoContainer}>
-        <Text style={styles.text}>{event.info}</Text>
+        {event.info && <Text style={styles.text}>{event.info}</Text>}
         <Text style={styles.startTime}>
           <Text style={styles.bold}>Date and time: </Text>
           {DateTime.fromISO(event.dates.start.dateTime).toLocaleString(

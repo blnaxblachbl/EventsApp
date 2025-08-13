@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -16,18 +16,26 @@ import type { Event } from '@api/types';
 import { styles } from './styles';
 import { EventCard } from '@components/EventCard';
 import { RootStackParamList } from '@routes/types';
+import { Text } from '@components/Text';
+import { Button } from '@components/Button';
 
 const Home = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(0);
+  const scrollRef = useRef<FlatList>(null);
 
   const { data, refetch, isFetching } = useQuery({
-    queryKey: [`events/${search}`],
-    queryFn: getEvents.bind(this, { page: 0, size: 20, search }),
-    initialData: [],
+    queryKey: [`events/${page}/${search}`],
+    queryFn: getEvents.bind(this, { page, size: 20, search }),
+    initialData: {
+      events: [],
+      totalPages: 0,
+    },
   });
 
   const debounceSerach = debounce((text: string) => {
+    setPage(0);
     setSearch(text);
   }, 500);
 
@@ -40,7 +48,8 @@ const Home = () => {
         style={styles.search}
       />
       <FlatList<Event>
-        data={data}
+        ref={scrollRef}
+        data={data.events}
         renderItem={renderItem}
         refreshControl={
           <RefreshControl refreshing={isFetching} onRefresh={refetch} />
@@ -50,11 +59,35 @@ const Home = () => {
         }
         style={styles.container}
         contentContainerStyle={
-          data.length === 0
+          data.events.length === 0
             ? styles.emptyContentContainer
             : styles.contentContainer
         }
         keyExtractor={item => item.id}
+        ListFooterComponent={
+          !isFetching ? (
+            <>
+              <Button
+                style={styles.button}
+                disabled={page === 0}
+                onPress={updatePage.bind(undefined, page - 1)}
+              >
+                <Text style={styles.buttonText}>Prev Page</Text>
+              </Button>
+              <Text style={styles.count}>
+                №{page + 1}/{data.totalPages}
+              </Text>
+              <Button
+                style={styles.button}
+                disabled={page >= data.totalPages}
+                onPress={updatePage.bind(undefined, page + 1)}
+              >
+                <Text style={styles.buttonText}>Next Page</Text>
+              </Button>
+            </>
+          ) : null
+        }
+        ListFooterComponentStyle={styles.footer}
       />
     </>
   );
@@ -67,6 +100,12 @@ const Home = () => {
     navigation.navigate('EventDetails', {
       event: item,
     });
+  }
+  function updatePage(newPage: number) {
+    if (page > 0 || page < data.totalPages) {
+      scrollRef.current?.scrollToOffset({ offset: 0, animated: true });
+      setTimeout(setPage.bind(undefined, newPage), 200);
+    }
   }
 };
 

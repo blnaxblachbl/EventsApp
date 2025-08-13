@@ -23,4 +23,22 @@ export const styles = StyleSheet.create({
     borderColor: '#ccc',
     margin: 12,
   },
+  footer: {
+    flexDirection: 'row',
+    paddingHorizontal: 12,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    alignSelf: 'stretch',
+    width: 'auto',
+    borderRadius: 2,
+  },
+  buttonText: {
+    color: '#fff',
+  },
+  count: {
+    marginHorizontal: 12,
+  },
 });

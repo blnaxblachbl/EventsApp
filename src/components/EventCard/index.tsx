@@ -21,9 +21,11 @@ export const EventCard = ({ event, style, ...rest }: EventCardProps) => {
       </ImageBackground>
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{event.name}</Text>
-        <Text style={styles.info} numberOfLines={5}>
-          {event.info}
-        </Text>
+        {event.info && (
+          <Text style={styles.info} numberOfLines={5}>
+            {event.info}
+          </Text>
+        )}
       </View>
     </Pressable>
   );
