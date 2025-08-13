@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
-import { Dimensions, Image, ScrollView, View, Text } from 'react-native';
+import { Dimensions, Image, ScrollView, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { DateTime } from 'luxon';
 import MapView, { PROVIDER_DEFAULT, Marker } from 'react-native-maps';
 
+import { Text } from '@components/Text';
 import { RouteProps } from '@routes/types';
 import { styles } from './styles';
 

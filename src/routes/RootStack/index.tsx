@@ -1,18 +1,30 @@
 // do not place this imports in 1st line
-import { I18nManager } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  NavigationContainerRef,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import SplashScreen from '@screens/Splash';
 import EventDetailsScreen from '@screens/EventDetails';
 import TabBar from '@routes/TabBar';
 import { RootStackParamList } from '@routes/types';
+import { useLanguage } from '@libs/I18nManager';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+export let navigationRef: NavigationContainerRef<RootStackParamList> | null;
+
 export default function RootStack() {
+  const { direction } = useLanguage();
+
   return (
-    <NavigationContainer direction={I18nManager.isRTL ? 'rtl' : 'ltr'}>
+    <NavigationContainer<RootStackParamList>
+      ref={ref => {
+        navigationRef = ref;
+      }}
+      direction={direction}
+    >
       <Stack.Navigator>
         <Stack.Screen
           name="Splash"

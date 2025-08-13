@@ -1,6 +1,7 @@
 import React from 'react';
-import { Pressable, Image, Text, View, ImageBackground } from 'react-native';
+import { Pressable, Image, View, ImageBackground } from 'react-native';
 
+import { Text } from '@components/Text';
 import { EventCardProps } from './types';
 import { styles } from './styles';
 
