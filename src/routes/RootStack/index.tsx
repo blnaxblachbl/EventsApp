@@ -5,11 +5,13 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import SplashScreen from '@screens/Splash';
-import EventDetailsScreen from '@screens/EventDetails';
 import TabBar from '@routes/TabBar';
 import { RootStackParamList } from '@routes/types';
 import { useLanguage } from '@libs/I18nManager';
+
+import SplashScreen from '@screens/Splash';
+import EventDetailsScreen from '@screens/EventDetails';
+import LoginScreen from '@screens/Login';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -33,6 +35,7 @@ export default function RootStack() {
             headerShown: false,
           }}
         />
+        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen
           name="TabBar"
           component={TabBar}

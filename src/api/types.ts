@@ -1,3 +1,15 @@
+export interface UserData {
+  id: string;
+  name: string;
+  phone: string;
+  email: string;
+}
+
+export type LoginParams = {
+  login: string;
+  password: string;
+};
+
 export interface ApiError {
   fault: {
     faultstring: string;

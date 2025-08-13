@@ -1,5 +1,10 @@
 import React from 'react';
-import { FlatList, ListRenderItemInfo, RefreshControl } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ListRenderItemInfo,
+  RefreshControl,
+} from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
@@ -15,7 +20,7 @@ const Home = () => {
 
   const { data, refetch, isFetching } = useQuery({
     queryKey: ['events'],
-    queryFn: getEvents.bind(this, { page: 0, size: 10 }),
+    queryFn: getEvents.bind(this, { page: 0, size: 20 }),
     initialData: [],
   });
 
@@ -26,7 +31,7 @@ const Home = () => {
       refreshControl={
         <RefreshControl refreshing={isFetching} onRefresh={refetch} />
       }
-      ListEmptyComponent={<Empty />}
+      ListEmptyComponent={isFetching ? <ActivityIndicator size={'large'} /> : <Empty />}
       style={styles.container}
       contentContainerStyle={
         data.length === 0

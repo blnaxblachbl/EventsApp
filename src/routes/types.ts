@@ -8,6 +8,7 @@ import { Event } from '@api/types';
 export type RootStackParamList = {
   Splash: undefined;
   TabBar: undefined;
+  Login: undefined;
   EventDetails: { event: Event };
 };
 

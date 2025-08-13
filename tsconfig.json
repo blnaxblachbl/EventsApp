@@ -10,7 +10,8 @@
       "@routes/*": ["./routes/*"],
       "@screens/*": ["./screens/*"],
       "@api/*": ["./api/*"],
-      "@assets/*": ["./assets/*"]
+      "@assets/*": ["./assets/*"],
+      "@hooks/*": ["./hooks/*"]
     }
   }
 }
