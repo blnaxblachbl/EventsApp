@@ -15,5 +15,12 @@ export const styles = StyleSheet.create({
   contentContainer: {
     alignItems: 'center',
     padding: 12,
+    paddingTop: 0,
+  },
+  search: {
+    padding: 12,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    margin: 12,
   },
 });

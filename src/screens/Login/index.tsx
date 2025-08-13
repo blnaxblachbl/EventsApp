@@ -1,8 +1,9 @@
 import React from 'react';
-import { TextInput, View } from 'react-native';
+import { View } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+import { TextInput } from '@components/TextInput';
 import { Text } from '@components/Text';
 import { Button } from '@components/Button';
 import { styles } from './styles';

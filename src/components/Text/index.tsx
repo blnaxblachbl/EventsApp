@@ -1,7 +1,6 @@
 import { useLanguage } from '@libs/I18nManager';
 import React, { useMemo } from 'react';
 import {
-  View,
   Text as RNText,
   TextProps,
   StyleProp,
