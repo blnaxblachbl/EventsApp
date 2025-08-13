@@ -48,3 +48,7 @@ npm run ios
 # OR
 yarn ios
 ```
+
+# DEMO
+
+<img src="./demo//1-ezgif.com-optimize.gif" />
