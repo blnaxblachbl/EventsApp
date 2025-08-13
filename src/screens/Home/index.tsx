@@ -1,17 +1,41 @@
-import { useQuery } from '@tanstack/react-query';
-import { getEvents } from '@api/events';
 import React from 'react';
-import { View } from 'react-native';
+import { FlatList, ListRenderItemInfo, RefreshControl } from 'react-native';
+import { useQuery } from '@tanstack/react-query';
+
+import { Empty } from '@components/Empty';
+import { getEvents } from '@api/events';
+import type { Event } from '@api/types';
+import { styles } from './styles';
+import { EventCard } from '@components/EventCard';
 
 const Home = () => {
-  const { data, isPending } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ['events'],
-    queryFn: getEvents.bind(this, { page: 0, size: 20 }),
+    queryFn: getEvents.bind(this, { page: 0, size: 10 }),
+    initialData: [],
   });
 
-  console.log(data, isPending);
+  console.log(isFetching);
 
-  return <View></View>;
+  return (
+    <FlatList<Event>
+      data={data}
+      renderItem={renderItem}
+      refreshControl={
+        <RefreshControl refreshing={isFetching} onRefresh={refetch} />
+      }
+      ListEmptyComponent={<Empty />}
+      style={styles.container}
+      contentContainerStyle={
+        data.length === 0
+          ? styles.emptyContentContainer
+          : styles.contentContainer
+      }
+    />
+  );
+  function renderItem({ item }: ListRenderItemInfo<Event>) {
+    return <EventCard event={item} />;
+  }
 };
 
 export default Home;
