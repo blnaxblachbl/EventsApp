@@ -8,6 +8,11 @@ export const styles = StyleSheet.create({
   infoContainer: {
     padding: 12,
   },
+  imageContainer: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   image: {
     width: '100%',
     aspectRatio: 16 / 9,

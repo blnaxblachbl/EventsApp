@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Header } from '@react-navigation/elements';
 
 const Tab = createBottomTabNavigator();
 
